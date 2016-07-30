@@ -13,10 +13,10 @@ class Config {
     
     function __construct(){
          /* 專案名稱 - <title> */
-        $this->projectName = 'KillingTime 殺時間';
+        $this->projectName = 'MaxBooking';
         
         /* 專案目錄結構設定 */
-        $this->root = '/killingtime/';
+        $this->root = '/Booking/';
         $this->imgRoot = $this->root . 'views/images/';
         $this->cssRoot = $this->root . 'views/css/';
         $this->jsRoot = $this->root . 'views/js/';
@@ -26,16 +26,11 @@ class Config {
         $this->db['port']       = '3306';
         $this->db['username']   = 'max';
         $this->db['password']   = '123456';
-        $this->db['dbname']     = 'killingtime';
+        $this->db['dbname']     = 'maxbooking';
         
         
         /* 不需要經過 是否登入狀態 的 request */
         $this->whiteList = array(  "home",
-                                    "player/isAccountExsist", 
-                                    "player/isNicknameExsist",
-                                    "player/forgetPassword",
-                                    "player/login",
-                                    "player/registe" 
                                 );
     }
 }
