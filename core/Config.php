@@ -11,15 +11,15 @@ class Config {
     
     public static $whiteList;
     
-    function __construct(){
+    static function getInstance(){
          /* 專案名稱 - <title> */
-        self::$projectName = 'MaxBooking';
+        self::$projectName = 'Max Booking';
         
         /* 專案目錄結構設定 */
         self::$root = '/Booking/';
-        self::$imgRoot = $this->root . 'views/images/';
-        self::$cssRoot = $this->root . 'views/css/';
-        self::$jsRoot = $this->root . 'views/js/';
+        self::$imgRoot = self::$root . 'views/images/';
+        self::$cssRoot = self::$root . 'views/css/';
+        self::$jsRoot = self::$root . 'views/js/';
 
         /* 資料庫連線設定 */
         self::$db['host']       = 'localhost';

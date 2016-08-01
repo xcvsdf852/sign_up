@@ -2,24 +2,20 @@
 
 class App{
     public function __construct() {
-		if(!isset($_GET['url'])){
-			header("Location: ".Config::$root."home");
-			exit;
-		}
-        
         $url = $this->parseUrl();
         
         $url[0] = ucfirst($url[0]);
         
         $controllerName =  "{$url[0]}Controller";
-
-        if(!in_array($_GET["url"], Config::$whiteList)){
+        
+        if(!isset($_GET['url'])){
+            $controllerName = "HomeController";
+		}else if(!in_array($_GET["url"], Config::$whiteList)){
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
             }
-    		if(empty( $_SESSION['isLogin'] ) || $_SESSION['isLogin'] != 'true'){
-    		    header("Location: ".Config::$root."home");
-    		    exit;
+    		if(!isset( $_SESSION['isLogin'] )){
+    		    $controllerName = "HomeController";
     		}
         }
         

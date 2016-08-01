@@ -1,6 +1,4 @@
 <?PHP
-require_once "Config.php";
-
 class myPDO{
      private static $connection = NULL;
      
