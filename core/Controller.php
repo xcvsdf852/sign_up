@@ -8,12 +8,7 @@ class Controller {
     }
     
     public function view($view, $data = Array()) {
-        $config = $this->config();
         require_once "views/$view.php";
-    }
-    
-    public function config(){
-        return new config();
     }
 }
 ?>

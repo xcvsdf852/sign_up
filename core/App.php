@@ -2,10 +2,8 @@
 
 class App{
     public function __construct() {
-        $config = new Config();
-        
 		if(!isset($_GET['url'])){
-			header("Location: ".$config->root."home");
+			header("Location: ".Config::$root."home");
 			exit;
 		}
         
@@ -15,12 +13,12 @@ class App{
         
         $controllerName =  "{$url[0]}Controller";
 
-        if(!in_array($_GET["url"], $config->whiteList)){
+        if(!in_array($_GET["url"], Config::$whiteList)){
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
             }
     		if(empty( $_SESSION['isLogin'] ) || $_SESSION['isLogin'] != 'true'){
-    		    header("Location: ".$config->root."home");
+    		    header("Location: ".Config::$root."home");
     		    exit;
     		}
         }
