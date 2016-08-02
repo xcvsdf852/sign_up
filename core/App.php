@@ -4,23 +4,24 @@ class App{
     public function __construct() {
         $url = $this->parseUrl();
         
-        $url[0] = ucfirst($url[0]);
+        // $url[0] = ucfirst($url[0]);
         
         $controllerName =  "{$url[0]}Controller";
-        
-        if(!isset($_GET['url'])){
-            $controllerName = "HomeController";
-		}else if(!in_array($_GET["url"], Config::$whiteList)){
-            if (session_status() == PHP_SESSION_NONE) {
-                session_start();
-            }
-    		if(!isset( $_SESSION['isLogin'] )){
-    		    $controllerName = "HomeController";
-    		}
-        }
+        // echo $controllerName;
+//         if(!isset($_GET['url'])){
+//             $controllerName = "BackstageController";
+// 		}else if(!in_array($_GET["url"], Config::$whiteList)){
+//             if (session_status() == PHP_SESSION_NONE) {
+//                 session_start();
+//             }
+//     		if(!isset( $_SESSION['isLogin'] )){
+//     		    $controllerName = "BackstageController";
+//     		}
+//         }
         
         if (!file_exists("controllers/$controllerName.php"))
-            $controllerName = 'HomeController';
+            return;
+        
         require_once "controllers/$controllerName.php";
         $controller = new $controllerName;
         $methodName = isset($url[1]) ? $url[1] : "index";

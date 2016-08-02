@@ -7,26 +7,26 @@ class Config {
     public static $cssRoot;
     public static $jsRoot;
     
-    public static $db;
+    // public static $db;
     
     public static $whiteList;
     
     static function getInstance(){
          /* 專案名稱 - <title> */
-        self::$projectName = 'Max Booking';
+        self::$projectName = 'sign_up';
         
         /* 專案目錄結構設定 */
-        self::$root = '/Booking/';
+        self::$root = '/sign_up/';
         self::$imgRoot = self::$root . 'views/images/';
         self::$cssRoot = self::$root . 'views/css/';
         self::$jsRoot = self::$root . 'views/js/';
 
         /* 資料庫連線設定 */
-        self::$db['host']       = 'localhost';
-        self::$db['port']       = '3306';
-        self::$db['username']   = 'max';
-        self::$db['password']   = '123456';
-        self::$db['dbname']     = 'maxbooking';
+        // self::$db['host']       = 'localhost';
+        // self::$db['port']       = '3306';
+        // self::$db['username']   = 'root';
+        // self::$db['password']   = '';
+        // self::$db['dbname']     = 'sign';
         
         
         /* 不需要經過 是否登入狀態 的 request */
