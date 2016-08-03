@@ -11,6 +11,7 @@ class Database
         $dsn = sprintf('mysql:dbname=%s;host=%s', static::DATABASE_NAME, static::DATABASE_HOST);
         try {
             $this->connection = new PDO($dsn, static::DATABASE_USERNAME, static::DATABASE_PASSWORD);
+            $this->connection -> exec("SET CHARACTER SET utf8");
         } catch (PDOException $e) {
             echo 'Connection failed: '.$e->getMessage();
         }

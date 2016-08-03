@@ -4,7 +4,7 @@ class App{
     public function __construct() {
         $url = $this->parseUrl();
         
-        // $url[0] = ucfirst($url[0]);
+        $url[0] = ucfirst($url[0]);
         
         $controllerName =  "{$url[0]}Controller";
         // echo $controllerName;

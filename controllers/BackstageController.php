@@ -6,9 +6,50 @@ class BackstageController extends Controller{
      function index(){
           $this->view('Backstage_index');
      }
-     #活動報名列表
+     #活動報名列表頁
      function sign_list(){
           $this->view('Backstage_list');
+     }
+     #取得所有活動資料列表
+     function get_all_sign_rule(){
+          $user=$this->model("sign_rule_list");
+          $this->view("show_json",$user->get_all_rule_list());
+     }
+     
+     #參與者列表 用bouuton 連接
+     // function participant_list($n){
+     //      $user=$this->model('Backstage_list',$n);
+          
+          
+     // }
+     
+     #要勾選參予者名單
+     function get_account_list(){
+          $user=$this->model("account_list");
+          $this->view("show_json",$user->get_list());
+     }
+     
+     #新增報名規則
+     function create_sign(){
+          // var_dump($_POST);
+          // exit;
+          $user=$this->model("new_sign");
+          $user->rule_title = $_POST['rule_title']; #活動名稱
+          $user->rule_limit = $_POST['rule_limit']; #限制人數
+          $user->rule_accompany = $_POST['rule_accompany']; #是否可以攜伴 1:是 0:否
+          $user->rule_start_time = $_POST['rule_start_time']; #報名開始時間
+          $user->rule_end_time = $_POST['rule_end_time'];  #報名截止時間
+          $user->rule_content = $_POST['rule_content']; #活動內容
+          $user->account = $_POST['account']; #人員 陣列
+          
+          $ary_return = $user->insert_sign();
+          // var_dump($ary_return);
+          // exit;
+          if($ary_return['isTrue']){
+               $this->view('Backstage_list',$ary_return);
+          }else{
+               $this->view('Backstage_index',$ary_return);
+          }
      }
 }
 ?>

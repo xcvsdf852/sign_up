@@ -15,7 +15,50 @@
      <script src="<?= Config::$jsRoot ?>bootstrap.min.js"></script>
      <script src="<?= Config::$jsRoot ?>bootstrap-dialog.min.js"></script>
      
-       
+     <script>
+          $(document).ready(function(){
+               // $( "#account_click" ).click(function(){
+                 get_account_list();
+               // });
+          })
+          
+          function get_account_list(){
+               $.post("get_account_list",function(d){
+                    var i=0;
+                    $.each(d.date,function(){
+                         $("#account").append('<input name = "account[]" type="checkbox" value="'+d.date[i].pa_id+'">'+d.date[i].pa_name+'&nbsp;&nbsp;&nbsp;');
+                         i++;
+                    });
+                    
+               },'json');
+          }
+     </script>
+     <?php
+         if(!empty($data)){
+             
+             if($data['isTrue']){
+                 echo "<script>
+                         $(document).ready(function(){
+                           BootstrapDialog.show({
+                             title: '執行操作成功!',
+                             message: '".$data['mesg']."'
+                           }).setType(BootstrapDialog.TYPE_SUCCESS);
+                         });
+                       </script>
+                       ";
+             }else{
+                 echo "<script>
+                         $(document).ready(function(){
+                             BootstrapDialog.show({
+                               title: 'Oops 系統發生錯誤!',
+                               message: '".$data['mesg']."'
+                             }).setType(BootstrapDialog.TYPE_DANGER);
+                         });
+                       </script>
+                       ";
+             }
+         }
+     ?>
 
 </head>
 <body>
@@ -26,11 +69,11 @@
           <div class="col-md-6">
           <!----------內容位置-------------->
                <h2 class="form-signin-heading" style= "text-align : center;font-family: DFKai-sb;">新增活動</h2>
-               <form class="form-horizontal" role="form">
+               <form class="form-horizontal" role="form" action="create_sign" method="post">
                     <div class="form-group">
                          <label for="rule_title" class="col-sm-2 control-label">活動名稱</label>
                          <div class="col-sm-10">
-                              <input type="email"  name = "rule_title" class="form-control" id="rule_title" placeholder="請輸入活動名稱">
+                              <input type="text"  name = "rule_title" class="form-control" id="rule_title" placeholder="請輸入活動名稱">
                          </div>
                     </div>
                     <div class="form-group">
@@ -51,19 +94,27 @@
                     <div class="form-group">
                          <label for="rule_start_time" class="col-sm-2 control-label">報名時間</label>
                          <div class="col-sm-10">
-                              <input type="date"  name = "rule_start_time" class="form-control" id="rule_start_time" >
+                              <input type="datetime-local"  name = "rule_start_time" class="form-control" id="rule_start_time" >
                          </div>
                     </div>
                     <div class="form-group">
                          <label for="rule_end_time" class="col-sm-2 control-label">報名時間</label>
                          <div class="col-sm-10">
-                              <input type="date"  name = "rule_end_time" class="form-control" id="rule_end_time" >
+                              <input type="datetime-local"  name = "rule_end_time" class="form-control" id="rule_end_time" >
                          </div>
                     </div>
                     <div class="form-group">
                          <label for="rule_content" class="col-sm-2 control-label">活動內容</label>
                          <div class="col-sm-10">
                               <input type="textarea"  name = "rule_content" class="form-control" id="rule_content" >
+                         </div>
+                    </div>
+                    <div class="form-group">
+                         <label for="rule_content" class="col-sm-2 control-label" id=account_click>可參予人員</label>
+                         <div class="col-sm-10">
+                             <div id=account>
+                                <div class="checkbox" ><label></label></div>
+                              </div>
                          </div>
                     </div>
                     <div class="form-group">
@@ -74,12 +125,10 @@
                </form>
 
 <!----------內容位置結束-------------->
-</div>
-<div class="col-md-3">
-</div>
-</div>
-<div class="footer">
+          </div>
+          <div class="col-md-3">
+          </div>
+     </div>
 
-</div>
 </body>
 </html>
