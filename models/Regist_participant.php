@@ -3,9 +3,11 @@ require_once("package/Database.php");
 require_once("package/str_sql_replace.php");
 
 class Regist_participant{
-    public $POST_data;
-    public $list_pa_id;
-    public $list_name;
+    public $POST_data; 
+    public $list_pa_id; #編號
+    public $list_name; #名稱
+    public $list_num; #人數
+    public $rule_id; #報名規則編號
     #先檢查是否有報名資格
     function check_qualifications(){
         #檢查報名規則id 
@@ -72,8 +74,14 @@ class Regist_participant{
                 FROM  `sign_rule` 
                 WHERE  `rule_IsEnable` =  '1'
                 AND `rule_id` = '$rule_id'";
-        echo $sql;
-        exit;
+        
+        // $sql = "SELECT COOUNT(*) as c
+        //         FROM  `sign_rule` 
+        //         WHERE  `rule_IsEnable` =  '1'
+        //         AND `rule_id` LIKE %,'$rule_id',% OR  %'$rule_id',% OR  %,'$rule_id'%
+        //         AND ";
+        // echo $sql;
+        // exit;
         $db = new Database();
         $row = $db->select($sql);
         // var_dump($row);
@@ -90,17 +98,29 @@ class Regist_participant{
             $arry_result['error'] = $arry_result;
             return $arry_result;
         }
-        // else{
-            
-        //     // echo '有資格參加';
-        //     $arry_result["isTrue"] = true;
-        //     $this->list_pa_id = $list_pa_id;
-        //     $this->list_name = $list_name;
-        //     return $arry_result;
-        // }
-        
-        
-        
+        #檢查名稱與編號是否有清單
+        $sql = "SELECT COUNT(*) as c
+                FROM  `sign_participant` 
+                WHERE  `pa_name` = '$list_name' 
+                AND `pa_id` = '$list_pa_id'";
+        // echo $sql;
+        // exit;
+        $row = $db->select($sql);
+        if($row[0]['c'] <= 0){
+            // echo '查無該活動，或活動目前未開放報名!';
+            $arry_result["isTrue"] = false;
+            $arry_result["errorCod"] = 6;
+            $arry_result['id'] = $rule_id;
+            $arry_result["mesg"] = "報名失敗，名稱不符合!";
+            $arry_result['error'] = $arry_result;
+            return $arry_result;
+        }
+        $arry_result["isTrue"] = true;
+        $this->list_pa_id = $list_pa_id;
+        $this->list_name = $list_name;
+        $this->list_num = $list_num +1;
+        $this->rule_id = $rule_id;
+        return $arry_result;
     }
     
     

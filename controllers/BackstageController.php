@@ -19,8 +19,6 @@ class BackstageController extends Controller{
      #參與者列表 用bouuton 連接
      // function participant_list($n){
      //      $user=$this->model('Backstage_list',$n);
-          
-          
      // }
      
      #要勾選參予者名單
@@ -51,5 +49,7 @@ class BackstageController extends Controller{
                $this->view('Backstage_index',$ary_return);
           }
      }
+     
+     #新增人員頁
 }
 ?>

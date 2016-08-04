@@ -54,5 +54,33 @@ class check_action{
         }
         
     }
+    #根據id取得報名剩餘數量
+    function get_now_num($id){
+        #檢查id 資料格式
+        if(!isset($id) || empty($id)){
+            $arry_result["isTrue"] = false;
+            $arry_result["errorCod"] = 2;
+            $arry_result["mesg"] = "資料傳輸失敗!";
+            $arry_result['error'] = $arry_result;
+            return $arry_result;    
+        }
+        $id= str_SQL_replace($id);
+        if(!filter_var($id,  FILTER_VALIDATE_INT)){
+            $arry_result["isTrue"] = false;
+            $arry_result["errorCod"] = 3;
+            $arry_result["mesg"] = "資料格式有誤!";
+            $arry_result['error'] = $arry_result;
+            return $arry_result;
+        }
+        
+        $sql = "SELECT  `rule_limit` 
+                FROM  `sign_rule` 
+                WHERE  `rule_id` =  '$id' 
+                ";
+        $db = new Database();
+        $row = $db->select($sql);
+        return $row[0]['rule_limit'];
+    }
+    
 }
 ?>
