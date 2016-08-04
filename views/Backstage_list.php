@@ -31,7 +31,6 @@
                                   +'<td><button class = "btn btn-danger" onclick = "alert('+d.date[i].rule_id+')">報名清單</button></td>'
                              +'</tr>'
                         );
-                        $("#items_"+d.date[i].id).val(d.date[i].items);
                         i++;
                     });
           		  }else{
@@ -69,22 +68,8 @@
                     </tr>
                   </thead>
                   <tbody id="content">
-                     <!--<tr>-->
-                     <!--     <th scope="row"></th>-->
-                     <!--     <td>中秋烤肉</td>-->
-                     <!--     <td>https://lab-eric3998.c9users.io/sign_up/Regist/index/5</td>-->
-                     <!--     <td>50</td>-->
-                     <!--     <td><button class = "btn btn-danger">報名清單</button></td>-->
-                     <!--</tr>-->
-                     <!--<tr>-->
-                     <!--     <th scope="row"></th>-->
-                     <!--     <td>運動大會</td>-->
-                     <!--     <td>https://lab-eric3998.c9users.io/sign_up/Regist/index/6</td>-->
-                     <!--     <td>190</td>-->
-                     <!--     <td><button class = "btn btn-danger">報名清單</button></td>-->
-                     <!--</tr>-->
-                     
-                    </tr>
+
+
                   </tbody>              
                 </table>
                 <input type="hidden" id="count" value="">

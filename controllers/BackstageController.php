@@ -51,5 +51,29 @@ class BackstageController extends Controller{
      }
      
      #新增人員頁
+     function people(){
+          $this->view('Backstage_people');
+     }
+     
+     #取得人員清單
+     function get_people(){
+          $user=$this->model('get_people_list');
+          $this->view("show_json",$user->get_people_list_json());
+     }
+     #檢查員工編號是否已有註冊
+     function check_num(){
+          $user=$this->model('check_people_num');
+          $user->pa_id = $_POST['pa_id'];
+          $this->view("show_json",$user->check_num());
+     }
+     
+     #新增人
+     function create_people(){
+          $user=$this->model('new_people');
+          $user->pa_id = $_POST['pa_id'];
+          $user->pa_name =$_POST['pa_name'];
+          $arry_result = $user->insert_people();
+          $this->view('Backstage_people',$arry_result );
+     }
 }
 ?>
