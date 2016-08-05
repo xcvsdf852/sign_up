@@ -47,21 +47,15 @@ class RegistSingleton {
         // echo $row[0]['rule_limit'];
         // exit;
         if($row[0]['rule_limit'] >= $list_num){
-           $sql ="UPDATE `sign_rule` 
-                  SET `rule_limit` = `rule_limit`- $list_num 
-                  WHERE `rule_id` = '$rule_id'";
+          $sql ="UPDATE `sign_rule` 
+                 SET `rule_limit` = `rule_limit`- $list_num 
+                 WHERE `rule_id` = '$rule_id'";
           // echo $sql;
           // exit;
           $row = $db->update($sql);
           // var_dump($row);
           // exit;
-          if(!$row){
-            $arry_result["isTrue"] = false;
-            $arry_result["errorCod"] = 2;
-            $arry_result["mesg"] = "報名失敗，系統錯誤!";
-            $arry_result['error'] = $arry_result;
-            return $arry_result;
-          }
+          
           $sql_Regist = "INSERT INTO `sign_list`(`list_pa_id`,`list_name`,`list_num`,`list_create_ip`,`list_create_time`,`list_rule_id`)
                        VALUES ('$list_pa_id','$list_name','$list_num','$IP',NOW(),'$rule_id')";
           // echo $sql_Regist;
@@ -70,6 +64,13 @@ class RegistSingleton {
           
           
           $db->get_connection()->commit();
+          if(!$row){
+            $arry_result["isTrue"] = false;
+            $arry_result["errorCod"] = 2;
+            $arry_result["mesg"] = "報名失敗，系統錯誤!";
+            $arry_result['error'] = $arry_result;
+            return $arry_result;
+          }
           // var_dump($row__Regist);
           if(!$row__Regist){
             $arry_result["isTrue"] = false;
@@ -87,8 +88,7 @@ class RegistSingleton {
         }else{
          throw new Exception($error);
         }
-        
-        
+
       }catch (Exception $err) {
       	$db->get_connection()->rollback();
       	//已超過報名人數
@@ -100,13 +100,6 @@ class RegistSingleton {
         $arry_result['error'] = $arry_result;
         return $arry_result;
       }
-      
-      
-      
-      
-      
-      
-      
       
     }
 
