@@ -44,16 +44,16 @@
         }
      ?>
      <script type="text/javascript">
-          // $(document).ready(function(){
-          //      refreshCount();
-          // });
-          // function refreshCount(){
-          //      var id = $("#rule_id").val();
-          //      $.post("/sign_up/Regist/get_num",{'id':id},function(d){
-          //           $("#num_limit").text(d.id);
-          //      })
-          //      setInterval(refreshCount, 5000);
-          // }
+          $(document).ready(function(){
+               // refreshCount();
+               setInterval(refreshCount, 5000);
+          });
+          function refreshCount(){
+               var id = $("#rule_id").val();
+               $.post("/sign_up/Regist/get_num",{'id':id},function(d){
+                    $("#num_limit").text(d.id);
+               })
+          }
      </script>
 </head>
 <body>
