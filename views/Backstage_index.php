@@ -32,6 +32,10 @@
                     
                },'json');
           }
+          function check_all(obj,cName){ 
+              var checkboxs = document.getElementsByName(cName); 
+              for(var i=0;i<checkboxs.length;i++){checkboxs[i].checked = obj.checked;} 
+          } 
      </script>
      <?php
          if(!empty($data)){
@@ -110,7 +114,9 @@
                          </div>
                     </div>
                     <div class="form-group">
-                         <label for="rule_content" class="col-sm-2 control-label" id=account_click>可參予人員</label>
+                         <label for="rule_content" class="col-sm-2 control-label" id="account_click">可參予人員
+                              <input type="checkbox" name="all" onclick="check_all(this,'account[]')" />
+                         </label>
                          <div class="col-sm-10">
                              <div id=account>
                                 <div class="checkbox" ><label></label></div>

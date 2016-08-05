@@ -38,14 +38,14 @@ class RegistController extends Controller{
                return;
           }
           #檢查該活動剩餘名額
-          $check_action = $this->model("check_action");
-          $limit_num = $check_action->get_now_num($user->rule_id);
-          // var_dump($limit_num); #取得目前人數
-          if($user->list_num > $limit_num){
-               $arry_result['mesg'] = "已超過報名人數";
-               $this->view('error',$arry_result);
-               return;
-          }
+          // $check_action = $this->model("check_action");
+          // $limit_num = $check_action->get_now_num($user->rule_id);
+
+          // if($user->list_num > $limit_num){
+          //      $arry_result['mesg'] = "已超過報名人數";
+          //      $this->view('error',$arry_result);
+          //      return;
+          // }
           #開始報名
           $RegistSingleton = $test1 = RegistSingleton::Sign_up();
           if(is_null($RegistSingleton)){

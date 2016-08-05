@@ -15,38 +15,60 @@
     <script src="<?= Config::$jsRoot ?>bootstrap.min.js"></script>
     <script src="<?= Config::$jsRoot ?>bootstrap-dialog.min.js"></script>
     <script>
+        var num_id = new Array();
         $(document).ready(function(){
             $.post("get_all_sign_rule",function(d){
-        		  // console.log(d);
-          		  if(d.isTrue){
-                    i=0;
-                    $("#content").html("");
-                    $.each(d.date,function(){
-                        $("#content").append(
-                            '<tr id = "row_'+d.date[i].rule_id+'">'
-                                  +'<th scope="row"></th>'
-                                  +'<td id = "title_'+d.date[i].rule_id+'">'+d.date[i].rule_title+'</td>'
-                                  +'<td id = "url_'+d.date[i].rule_id+'">https://lab-eric3998.c9users.io/sign_up/Regist/index/'+d.date[i].rule_id+'</td>'
-                                  +'<td id = "num_'+d.date[i].rule_id+'">'+d.date[i].rule_limit+'</td>'
-                                  +'<td><button class = "btn btn-danger" onclick = "alert('+d.date[i].rule_id+')">報名清單</button></td>'
-                             +'</tr>'
-                        );
-                        i++;
-                    });
-          		  }else{
+    		  // console.log(d);
+      		  if(d.isTrue){
+                var i=0;
+                $("#content").html("");
+                $.each(d.date,function(){
+                    $("#content").append(
+                        '<tr id = "row_'+d.date[i].rule_id+'">'
+                              +'<th scope="row"></th>'
+                              +'<td id = "title_'+d.date[i].rule_id+'">'+d.date[i].rule_title+'</td>'
+                              +'<td id = "url_'+d.date[i].rule_id+'">https://lab-eric3998.c9users.io/sign_up/Regist/index/'+d.date[i].rule_id+'</td>'
+                              +'<td id = "num_'+d.date[i].rule_id+'">'+d.date[i].rule_limit+'</td>'
+                              +'<td><button class = "btn btn-danger" onclick = "alert('+d.date[i].rule_id+')">報名清單</button></td>'
+                         +'</tr>'
+                    );
+                    num_id[d.date[i].rule_id] = d.date[i].rule_id;
+                    // console.log(num_id);
+                    i++;
+                });
+      		  }else{
           		    BootstrapDialog.show({
                         title: 'Oops 系統發生錯誤!',
                         message: d.mesg
                     }).setType(BootstrapDialog.TYPE_DANGER);;
                   return false;
-          		  }
+      		  }
         		  
           		//   $("#P").val(P);
           		//   $("#P_number").val(P_number);
           		//   var c=d.page_num;
           		//   $("#tage").load('/homework0721_MVC/models/package/Tage.php?P='+P+'&P_number='+P_number+'&count_num='+c+'&function=list_load');
-        	  },"json");
+	      },"json");
+        //   console.log(num_id);
         });
+        
+        function get_num(){
+           
+            $.each(num_id,function(){
+                // console.log(num_id);
+                // alert(num_id[i]);
+                
+                $.post('get_num',{ id: num_id[i]},function(d){
+                    // console.log(i);
+                    alert("#num_"+id[d]);
+                    // $("#num_"+num_id[i]).text(d.id);
+                    // alert($("#num_"+num_id[i]).text());
+                });
+                
+            })
+        }
+        
+        
     </script>
 </head>
 <body>
@@ -60,7 +82,7 @@
                <table class="table table-hover">
                   <thead class="thead-inverse">
                     <tr>
-                      <th>#</th>
+                      <th onclick ="get_num()">#</th>
                       <th>名稱</th>
                       <th>網址</th>
                       <th>剩餘名額</th>

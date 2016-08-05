@@ -81,4 +81,8 @@ class Database
     {
         return $this->connection->exec($sql);
     }
+    
+    public function get_connection(){
+        return $this->connection;
+    }
 }
