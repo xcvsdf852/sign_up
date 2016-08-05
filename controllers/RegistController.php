@@ -4,10 +4,10 @@ class RegistController extends Controller{
      
      #報名活動頁
      function index($id = 0){
-          if($id == 0){
-               $arry_result['mesg'] = "活動報名網址有誤";
-               $this->view('error',$arry_result);
-          }
+          // if($id == 0){
+          //      $arry_result['mesg'] = "活動報名網址有誤";
+          //      $this->view('error',$arry_result);
+          // }
           $user=$this->model("check_action");
           #檢查該筆活動日期是否可以報名
           $arry_result = $user->check_date($id);

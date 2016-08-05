@@ -7,7 +7,7 @@ class sign_rule_list{
     #取得全部清單
     function get_all_rule_list(){
         $db = new Database();
-        $sql ="SELECT `rule_id`,`rule_title`,`rule_limit`,`rule_accompany`,`rule_start_time`,`rule_end_time`,`rule_content` 
+        $sql ="SELECT `rule_id`,`rule_title`,`rule_limit`,`rule_accompany`,`rule_start_time`,`rule_end_time`,`rule_content`,`rule_url_id`
                FROM `sign_rule` 
                WHERE  `rule_IsEnable` =  '1' 
                ORDER BY `rule_create_time` DESC";

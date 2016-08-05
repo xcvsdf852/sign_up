@@ -3,6 +3,7 @@ session_start();
 require_once("package/Database.php");
 require_once("package/str_sql_replace.php");
 require_once("package/get_IP.php");
+require_once("package/Tools.php");
 // { 'rule_title' => string(6) "吃飯"
 // 'rule_limit' => string(2) "30"
 // 'rule_accompany' => string(1) "0"
@@ -33,14 +34,14 @@ class new_sign{
             return $arry_result;   
         } 
         
-        #起始日期不能小於今天
-        if(strtotime($this->rule_start_time) < strtotime($datetime)){ 
-            $arry_result["isTrue"] = false;
-            $arry_result["errorCod"] = 18;
-            $arry_result["mesg"] = "新增活動失敗，起始日期須大於今天!";
-            $arry_result['error'] = $arry_result;
-            return $arry_result;   
-        } 
+        // #起始日期不能小於今天
+        // if(strtotime($this->rule_start_time) < strtotime($datetime)){ 
+        //     $arry_result["isTrue"] = false;
+        //     $arry_result["errorCod"] = 18;
+        //     $arry_result["mesg"] = "新增活動失敗，起始日期須大於今天!";
+        //     $arry_result['error'] = $arry_result;
+        //     return $arry_result;   
+        // } 
         #截止日期必須大於今天
         if(strtotime($this->rule_end_time) < strtotime($datetime)){ 
             $arry_result["isTrue"] = false;
@@ -160,15 +161,15 @@ class new_sign{
             }
         }
         $account = implode (',', $this->account);
-        
-        // echo $account;
+        $url_id = Tools::getRandPassword();
+        // echo $url_id;
         // exit;
         $IP = getIP();
         
         #連結資料庫
         $db = new Database();
-        $sql = "INSERT INTO `sign_rule`(`rule_title`,`rule_limit`,`rule_accompany`,`rule_start_time`,`rule_end_time`,`rule_create_ip`,`rule_create_time`,`rule_participant`,`rule_content`)
-                VALUES ('$rule_title','$rule_limit','$rule_accompany','$rule_start_time','$rule_end_time','$IP',NOW(),'$account','$rule_content')";
+        $sql = "INSERT INTO `sign_rule`(`rule_title`,`rule_limit`,`rule_accompany`,`rule_start_time`,`rule_end_time`,`rule_create_ip`,`rule_create_time`,`rule_participant`,`rule_content`,`rule_url_id`)
+                VALUES ('$rule_title','$rule_limit','$rule_accompany','$rule_start_time','$rule_end_time','$IP',NOW(),'$account','$rule_content','$url_id')";
         // echo $sql;
         // exit;
         if($db->insert($sql)){

@@ -15,7 +15,7 @@ class check_action{
             return $arry_result;    
         }
         $id= str_SQL_replace($id);
-        if(!filter_var($id,  FILTER_VALIDATE_INT)){
+        if(!filter_var($id,  FILTER_SANITIZE_STRING)){
             $arry_result["isTrue"] = false;
             $arry_result["errorCod"] = 3;
             $arry_result["mesg"] = "資料格式有誤!";
@@ -23,10 +23,10 @@ class check_action{
             return $arry_result;
         }
         
-        $sql = "SELECT COUNT(`rule_id`) as c, `rule_id` ,  `rule_title` ,  `rule_limit` ,  `rule_accompany` ,  `rule_start_time` ,  `rule_end_time` ,  `rule_content` 
+        $sql = "SELECT COUNT(`rule_id`) as c, `rule_id` ,  `rule_title` ,  `rule_limit` ,  `rule_accompany` ,  `rule_start_time` ,  `rule_end_time` ,  `rule_content`
                 FROM  `sign_rule` 
                 WHERE  `rule_IsEnable` =  '1'
-                AND `rule_id` = '$id'
+                AND `rule_url_id` = '$id'
                 AND  `rule_start_time` < NOW( ) 
                 AND  `rule_end_time` > NOW( ) 
                 ORDER BY  `rule_create_time` DESC";

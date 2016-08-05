@@ -26,7 +26,7 @@
                         '<tr id = "row_'+d.date[i].rule_id+'">'
                               +'<th scope="row"></th>'
                               +'<td id = "title_'+d.date[i].rule_id+'">'+d.date[i].rule_title+'</td>'
-                              +'<td id = "url_'+d.date[i].rule_id+'">https://lab-eric3998.c9users.io/sign_up/Regist/index/'+d.date[i].rule_id+'</td>'
+                              +'<td id = "url_'+d.date[i].rule_id+'">https://lab-eric3998.c9users.io/sign_up/Regist/index/'+d.date[i].rule_url_id+'</td>'
                               +'<td id = "num_'+d.date[i].rule_id+'">'+d.date[i].rule_limit+'</td>'
                             //   +'<td><button class = "btn btn-danger" onclick = "alert('+d.date[i].rule_id+')">報名清單</button></td>'
                          +'</tr>'
@@ -45,7 +45,7 @@
           		//   $("#P_number").val(P_number);
           		//   var c=d.page_num;
           		//   $("#tage").load('/homework0721_MVC/models/package/Tage.php?P='+P+'&P_number='+P_number+'&count_num='+c+'&function=list_load');
-          		refreshCount();
+          		// refreshCount();
           		setInterval(refreshCount, 5000);
 	      },"json");
         });
@@ -72,7 +72,7 @@
           		//   var c=d.page_num;
           		//   $("#tage").load('/homework0721_MVC/models/package/Tage.php?P='+P+'&P_number='+P_number+'&count_num='+c+'&function=list_load');
           		
-          		setInterval(refreshCount, 5000);
+          		// setInterval(refreshCount, 5000);
 	      },"json");
         }
         
