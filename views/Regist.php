@@ -43,6 +43,18 @@
              }
         }
      ?>
+     <script type="text/javascript">
+          // $(document).ready(function(){
+          //      refreshCount();
+          // });
+          // function refreshCount(){
+          //      var id = $("#rule_id").val();
+          //      $.post("/sign_up/Regist/get_num",{'id':id},function(d){
+          //           $("#num_limit").text(d.id);
+          //      })
+          //      setInterval(refreshCount, 5000);
+          // }
+     </script>
 </head>
 <body>
      
@@ -63,7 +75,9 @@
                     <div class="form-group">
                          <label for="rule_limit" class="col-sm-2 control-label">剩餘名額</label>
                          <div class="col-sm-10">
-                              <?php echo $data['mesg']['rule_limit']; ?>
+                              <div id="num_limit">
+                                   <?php echo $data['mesg']['rule_limit']; ?>
+                              </div>
                          </div>
                     </div>
                     <?php if($data['mesg']['rule_accompany'] == 1){?>
@@ -92,7 +106,7 @@
                               <button type="submit" class="btn btn-info">送出</button>
                          </div>
                     </div>
-                    <input type="hidden" name="rule_id" value = "<?php echo $data['mesg']['rule_id'];?>">
+                    <input type="hidden" name="rule_id"  id ="rule_id" value = "<?php echo $data['mesg']['rule_id'];?>">
                </form>
                 
 

@@ -15,9 +15,8 @@
     <script src="<?= Config::$jsRoot ?>bootstrap.min.js"></script>
     <script src="<?= Config::$jsRoot ?>bootstrap-dialog.min.js"></script>
     <script>
-        var num_id = new Array();
         $(document).ready(function(){
-            $.post("get_all_sign_rule",function(d){
+             $.post("get_all_sign_rule",function(d){
     		  // console.log(d);
       		  if(d.isTrue){
                 var i=0;
@@ -29,11 +28,9 @@
                               +'<td id = "title_'+d.date[i].rule_id+'">'+d.date[i].rule_title+'</td>'
                               +'<td id = "url_'+d.date[i].rule_id+'">https://lab-eric3998.c9users.io/sign_up/Regist/index/'+d.date[i].rule_id+'</td>'
                               +'<td id = "num_'+d.date[i].rule_id+'">'+d.date[i].rule_limit+'</td>'
-                              +'<td><button class = "btn btn-danger" onclick = "alert('+d.date[i].rule_id+')">報名清單</button></td>'
+                            //   +'<td><button class = "btn btn-danger" onclick = "alert('+d.date[i].rule_id+')">報名清單</button></td>'
                          +'</tr>'
                     );
-                    num_id[d.date[i].rule_id] = d.date[i].rule_id;
-                    // console.log(num_id);
                     i++;
                 });
       		  }else{
@@ -48,24 +45,35 @@
           		//   $("#P_number").val(P_number);
           		//   var c=d.page_num;
           		//   $("#tage").load('/homework0721_MVC/models/package/Tage.php?P='+P+'&P_number='+P_number+'&count_num='+c+'&function=list_load');
+          		refreshCount();
+          		setInterval(refreshCount, 5000);
 	      },"json");
-        //   console.log(num_id);
         });
         
-        function get_num(){
-           
-            $.each(num_id,function(){
-                // console.log(num_id);
-                // alert(num_id[i]);
-                
-                $.post('get_num',{ id: num_id[i]},function(d){
-                    // console.log(i);
-                    alert("#num_"+id[d]);
-                    // $("#num_"+num_id[i]).text(d.id);
-                    // alert($("#num_"+num_id[i]).text());
+        function refreshCount(){
+            $.post("get_all_sign_rule",function(d){
+    		  // console.log(d);
+      		  if(d.isTrue){
+                var i=0;
+                $.each(d.date,function(){
+                    $('#num_'+d.date[i].rule_id).text(d.date[i].rule_limit);
+                    i++;
                 });
-                
-            })
+      		  }else{
+          		    BootstrapDialog.show({
+                        title: 'Oops 系統發生錯誤!',
+                        message: d.mesg
+                    }).setType(BootstrapDialog.TYPE_DANGER);;
+                  return false;
+      		  }
+        		  
+          		//   $("#P").val(P);
+          		//   $("#P_number").val(P_number);
+          		//   var c=d.page_num;
+          		//   $("#tage").load('/homework0721_MVC/models/package/Tage.php?P='+P+'&P_number='+P_number+'&count_num='+c+'&function=list_load');
+          		
+          		setInterval(refreshCount, 5000);
+	      },"json");
         }
         
         
@@ -86,7 +94,7 @@
                       <th>名稱</th>
                       <th>網址</th>
                       <th>剩餘名額</th>
-                      <th>報名清單</th>
+                      <!--<th>報名清單</th>-->
                     </tr>
                   </thead>
                   <tbody id="content">

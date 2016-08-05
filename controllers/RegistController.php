@@ -67,5 +67,12 @@ class RegistController extends Controller{
      // function participant_list($n){
      //      $this->view('Backstage_list',$n);
      // }
+     
+     #活動列表自動更新報名人數
+     function get_num(){
+          $check_action = $this->model("check_action");
+          $limit_num['id'] = $check_action->get_now_num($_POST['id']);
+          $this->view("show_json",json_encode($limit_num));
+     }
 }
 ?>

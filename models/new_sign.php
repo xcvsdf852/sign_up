@@ -22,6 +22,36 @@ class new_sign{
     function insert_sign(){
         // echo $this->rule_accompany;
         // exit;
+        $datetime= date("Y/m/d H:i:s");
+
+        #截止日期不能小於起始日期
+        if(strtotime($this->rule_start_time)>strtotime($this->rule_end_time)){ 
+            $arry_result["isTrue"] = false;
+            $arry_result["errorCod"] = 17;
+            $arry_result["mesg"] = "新增活動失敗，截止時間不能小於起始時間!";
+            $arry_result['error'] = $arry_result;
+            return $arry_result;   
+        } 
+        
+        #起始日期不能小於今天
+        if(strtotime($this->rule_start_time) < strtotime($datetime)){ 
+            $arry_result["isTrue"] = false;
+            $arry_result["errorCod"] = 18;
+            $arry_result["mesg"] = "新增活動失敗，起始日期須大於今天!";
+            $arry_result['error'] = $arry_result;
+            return $arry_result;   
+        } 
+        #截止日期必須大於今天
+        if(strtotime($this->rule_end_time) < strtotime($datetime)){ 
+            $arry_result["isTrue"] = false;
+            $arry_result["errorCod"] = 18;
+            $arry_result["mesg"] = "新增活動失敗，截止日期須大於今天!";
+            $arry_result['error'] = $arry_result;
+            return $arry_result;   
+        } 
+        
+        
+        
         #活動名稱
         if(!isset($this->rule_title) || empty($this->rule_title)){
             $arry_result["isTrue"] = false;

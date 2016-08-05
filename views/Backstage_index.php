@@ -102,7 +102,7 @@
                          </div>
                     </div>
                     <div class="form-group">
-                         <label for="rule_end_time" class="col-sm-2 control-label">報名時間</label>
+                         <label for="rule_end_time" class="col-sm-2 control-label">截止時間</label>
                          <div class="col-sm-10">
                               <input type="datetime-local"  name = "rule_end_time" class="form-control" id="rule_end_time" >
                          </div>
