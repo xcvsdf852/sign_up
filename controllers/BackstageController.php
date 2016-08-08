@@ -16,10 +16,16 @@ class BackstageController extends Controller{
           $this->view("show_json",$user->get_all_rule_list());
      }
      
-     #參與者列表 用bouuton 連接
-     // function participant_list($n){
-     //      $user=$this->model('Backstage_list',$n);
-     // }
+     //參與者列表 用bouuton 連接
+     function get_participant_list($n){
+          
+          $user=$this->model('participant_list');
+          $ary_return = $user->now_participant_list($n);
+          // var_dump($ary_return);
+          // exit;
+          $this->view("Backstage_participant_list",$ary_return);
+          
+     }
      
      #要勾選參予者名單
      function get_account_list(){

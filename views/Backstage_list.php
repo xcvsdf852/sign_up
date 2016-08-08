@@ -28,7 +28,7 @@
                               +'<td id = "title_'+d.date[i].rule_id+'">'+d.date[i].rule_title+'</td>'
                               +'<td id = "url_'+d.date[i].rule_id+'">https://lab-eric3998.c9users.io/sign_up/Regist/index/'+d.date[i].rule_url_id+'</td>'
                               +'<td id = "num_'+d.date[i].rule_id+'">'+d.date[i].rule_limit+'</td>'
-                            //   +'<td><button class = "btn btn-danger" onclick = "alert('+d.date[i].rule_id+')">報名清單</button></td>'
+                              +'<td><button class = "btn btn-danger" onclick = "window_open('+d.date[i].rule_id+')">報名清單</button></td>'
                          +'</tr>'
                     );
                     i++;
@@ -63,7 +63,7 @@
           		    BootstrapDialog.show({
                         title: 'Oops 系統發生錯誤!',
                         message: d.mesg
-                    }).setType(BootstrapDialog.TYPE_DANGER);;
+                    }).setType(BootstrapDialog.TYPE_DANGER);
                   return false;
       		  }
         		  
@@ -74,6 +74,11 @@
           		
           		// setInterval(refreshCount, 5000);
 	      },"json");
+        }
+        
+        //取得該活動目前報名狀況
+        function window_open(id){
+            window.open('get_participant_list/'+id, 'participant list', config='height=500,width=500,location=no,scrollbars=yes,menubar=no,left = 150,top= 150');
         }
         
         
@@ -94,7 +99,7 @@
                       <th>名稱</th>
                       <th>網址</th>
                       <th>剩餘名額</th>
-                      <!--<th>報名清單</th>-->
+                      <th>報名清單</th>
                     </tr>
                   </thead>
                   <tbody id="content">
